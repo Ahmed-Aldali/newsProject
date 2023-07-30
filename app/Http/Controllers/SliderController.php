@@ -43,7 +43,7 @@ class SliderController extends Controller
         ]);
 
         if(! $validator->fails()){
-            
+
             $sliders = new Slider();
 
 
@@ -115,7 +115,7 @@ class SliderController extends Controller
         ]);
 
         if(! $validator->fails()){
-            
+
             $sliders = Slider::findOrFail($id);
 
 
@@ -136,7 +136,7 @@ class SliderController extends Controller
             $sliders->description = $request->get('description');
 
             $isSaved = $sliders->save();
-          
+
             return ['redirect' => route('sliders.index')];
 
         }
@@ -155,7 +155,7 @@ class SliderController extends Controller
      */
     public function destroy($id)
     {
-       
+
         $sliders = Slider::destroy($id);
     }
 }

@@ -69,7 +69,8 @@ class HomeController extends Controller
     }
 
 
-    public function storeComment(Request $request ){
+    public function storeComment(Request $request  ){
+
         $validator = Validator($request->all() , [
 
             ] , [
@@ -78,8 +79,10 @@ class HomeController extends Controller
 
             if(! $validator->fails()){
                 $comments = new Comment();
+
                 $comments->comment = $request->input('comment');
-                $comments->	article_id = $request->input('article_id');
+                $comments->article_id = $request->input('article_id');
+                $comments->user_id = $request->input('user_id');
 
                 $isSaved = $comments->save();
 

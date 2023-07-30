@@ -50,8 +50,12 @@ return [
             'driver' => 'session',
             'provider' => 'authors',
         ],
+        'viewer' => [
+            'driver' => 'session',
+            'provider' => 'viewers',
+        ],
 
-        
+
     ],
 
     /*
@@ -78,7 +82,7 @@ return [
             'model' => App\Models\User::class,
         ],
 
-           
+
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
@@ -87,6 +91,10 @@ return [
         'authors' => [
             'driver' => 'eloquent',
             'model' => App\Models\Author::class,
+        ],
+        'viewers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Viewer::class,
         ],
 
         // 'users' => [

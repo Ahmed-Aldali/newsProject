@@ -1,3 +1,6 @@
+
+
+
 @extends('news.parent')
 
 @section('title' , 'Temp')
@@ -54,7 +57,9 @@
                 <div class="form-group">
                   <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
                 </div>
-                <button type="button" onclick="performStore({{ $articles->id }})" class="btn btn-primary">Submit</button>
+                <button type="button" onclick="performStore({{ $articles->id }})" class="btn btn-primary">Comment</button>
+                <input hidden id="user_id" name="user_id" value="10">
+
               </form>
             </div>
           </div>
@@ -62,9 +67,9 @@
           <!-- Single Comment -->
           @foreach ( $comments as $comment)
           <div class="media mb-4">
-            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+            <img class="img-circle elevation-2" width="30" src="{{asset('storage/images/author/'.$comment->user->image)}}" alt="">
             <div class="media-body">
-              <h5 class="mt-0">{{ $comment->id }}</h5>
+              <h5 class="mt-0">{{ $comment->user->first_name }}</h5>
               {{ $comment->comment }}
             </div>
           </div>
@@ -129,6 +134,7 @@
 
             formData.append('comment',document.getElementById('comment').value);
             formData.append('article_id',articleID);
+            formData.append('user_id',document.getElementById('user_id').value);
 
             store('/news/storeComment' , formData);
         }

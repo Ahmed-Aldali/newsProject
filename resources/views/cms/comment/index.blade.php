@@ -96,7 +96,7 @@
             <thead>
               <tr>
                 <th style="width: 10px">id</th>
-                {{-- <th>User Name</th> --}}
+                <th>User id</th>
                 <th>Comment</th>
                 <th>Article</th>
 
@@ -109,8 +109,10 @@
                 @foreach ($comments as $comment )
                 <tr>
                     <td>{{$comment->id  }}</td>
-                    <td>{{$comment->comment  }}</td>
+
                     {{-- <td>{{ $comment->viewers->user->firstname }}</td> --}}
+                    <td>{{ $comment->user_id }}</td>
+                    <td>{{$comment->comment  }}</td>
                     <td>{{ $comment->article->title }}</td>
 
                     {{-- <td><span class="badge bg-info"> {{$Comment->status}}</span></td> --}}

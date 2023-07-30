@@ -93,5 +93,12 @@ Route::prefix('news')->group(function(){
     Route::get('showContact', [HomeController::class, 'showContact'])->name('news.showContact');
     Route::post('storeContact', [HomeController::class, 'storeContact']);
 
+});
+
+
+// Route::prefix('news')->middleware('auth:viewer')->group(function(){
+Route::prefix('news')->group(function(){
+
     Route::post('storeComment', [HomeController::class, 'storeComment'])->name('news.storeComment');
+
 });
