@@ -27,10 +27,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
+Route::get('/', [HomeController::class, 'index']);
 
 
 Route::prefix('cms/')->middleware('guest:admin,author')->group(function(){
@@ -84,6 +85,8 @@ Route::prefix('cms')->middleware('auth:admin,author')->group(function(){
 
 
 });
+
+
 
 Route::prefix('news')->group(function(){
     Route::get('index', [HomeController::class, 'index'])->name('news.index');

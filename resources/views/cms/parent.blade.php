@@ -231,9 +231,9 @@
             </ul>
           </li>
 
-          @canAny(['Index-Role' , 'Create-Role','Index-permission' , 'Create-permission'])
+          {{-- @canAny(['Index-Role' , 'Create-Role','Index-permission' , 'Create-permission']) --}}
           <li class="nav-header">Roles && Permissions</li>
-          @canAny(['Index-Role' , 'Create-Role'])
+          {{-- @canAny(['Index-Role' , 'Create-Role']) --}}
           <li class="nav-item">
             <a href="#" class="nav-link">
               {{-- <i class="nav-icon fas fa-user-crown"></i> --}}
@@ -246,7 +246,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-                @can('Index-Role' )
+                {{-- @can('Index-Role' ) --}}
               <li class="nav-item">
                 <a href="{{ route('roles.index') }}" class="nav-link">
                   <i class="fas fa-list nav-icon"></i>
@@ -254,8 +254,8 @@
                   <p>Index</p>
                 </a>
               </li>
-              @endcan
-              @can('Create-Role' )
+              {{-- @endcan --}}
+              {{-- @can('Create-Role' ) --}}
               <li class="nav-item">
                 <a href="{{ route('roles.create') }}" class="nav-link">
                   <i class="fas fa-plus nav-icon"></i>
@@ -263,12 +263,12 @@
                   <p>Create</p>
                 </a>
               </li>
-              @endcan
+              {{-- @endcan --}}
             </ul>
           </li>
-          @endCanAny
+          {{-- @endCanAny --}}
 
-          @canAny(['Index-permission' , 'Create-permission'])
+          {{-- @canAny(['Index-permission' , 'Create-permission']) --}}
           <li class="nav-item">
             <a href="#" class="nav-link">
               {{-- <i class="nav-icon fas fa-user-crown"></i> --}}
@@ -281,7 +281,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-                @can('Index-permission')
+                {{-- @can('Index-permission') --}}
               <li class="nav-item">
                 <a href="{{ route('permissions.index') }}" class="nav-link">
                   <i class="fas fa-list nav-icon"></i>
@@ -289,8 +289,8 @@
                   <p>Index</p>
                 </a>
               </li>
-              @endcan
-              @can('Create-permission')
+              {{-- @endcan --}}
+              {{-- @can('Create-permission') --}}
               <li class="nav-item">
                 <a href="{{ route('permissions.create') }}" class="nav-link">
                   <i class="fas fa-plus nav-icon"></i>
@@ -298,11 +298,11 @@
                   <p>Create</p>
                 </a>
               </li>
-              @endcan
+              {{-- @endcan --}}
             </ul>
           </li>
-          @endCanAny
-          @endCanAny
+          {{-- @endCanAny --}}
+          {{-- @endCanAny --}}
 
           @canAny(['Index-Admin' , 'Create-Admin','Index-Author' , 'Create-Author'])
 
@@ -385,7 +385,7 @@
           @endCanAny
 
 
-          {{-- @canAny(['Index-City' , 'Create-City','Index-Country' , 'Create-Country','Index-Category' , 'Create-Category','Index-Article' , 'Create-Article']) --}}
+          @canAny(['Index-City' , 'Create-City','Index-Country' , 'Create-Country','Index-Category' , 'Create-Category','Index-Article' , 'Create-Article'])
           <li class="nav-header">Content Mangment</li>
 
           @canAny(['Index-City' , 'Create-City'])
@@ -493,7 +493,7 @@
           </li>
           @endCanAny
 
-          {{-- @canAny(['Index-Article' , 'Create-Article']) --}}
+          @canAny(['Index-Article' , 'Create-Article'])
           <li class="nav-item">
             <a href="#" class="nav-link">
               {{-- <i class="nav-icon fas fa-city"></i> --}}
@@ -505,7 +505,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-                {{-- @can('Create-Article') --}}
+                @can('Create-Article')
               <li class="nav-item">
                 <a href="{{ route('createArticle', Auth::id()) }}" class="nav-link">
                     <i class="fas fa-plus nav-icon"></i>
@@ -513,9 +513,9 @@
                   <p>Create Article</p>
                 </a>
               </li>
-              {{-- @endcan --}}
+              @endcan
 
-              {{-- @can('Index-Article') --}}
+              @can('Index-Article')
               <li class="nav-item">
                 <a href="{{ route('indexArticle' , Auth::id()) }}" class="nav-link">
                   <i class="fas fa-list nav-icon"></i>
@@ -523,9 +523,9 @@
                   <p>Index Author Articles</p>
                 </a>
               </li>
-              {{-- @endcan --}}
+              @endcan
 
-              {{-- @can('Index-Article') --}}
+              @can('Index-Article')
               <li class="nav-item">
                 <a href="{{ route('articles.index') }}" class="nav-link">
                   <i class="fas fa-list nav-icon"></i>
@@ -533,12 +533,12 @@
                   <p>Index All Articles</p>
                 </a>
               </li>
-              {{-- @endcan --}}
+              @endcan
 
             </ul>
           </li>
-          {{-- @endCanAny --}}
-          {{-- @endCanAny --}}
+          @endCanAny
+          @endCanAny
 
 
           @canAny(['Index-Slider' , 'Create-Slider','Index-Contact' ])

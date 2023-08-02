@@ -54,7 +54,8 @@
                           </thead>
                           <tbody>
                             @foreach ($permissions as $permission)
-                            {{-- @if( '{{$permission->guard_name}}' == 'admin') --}}
+                            {{-- @dd($guard_name) --}}
+                            @if($permission->guard_name ==  $guard_name)
                             <tr>
                                 {{-- <span class="tag tag-success">Approved</span>s --}}
                                 <td>{{$permission->id}}</td>
@@ -70,9 +71,8 @@
                                   </div>
                                 </td>
                               </tr>
-                            {{-- @endif --}}
 
-
+                              @endif
 
                             @endforeach
                           </tbody>

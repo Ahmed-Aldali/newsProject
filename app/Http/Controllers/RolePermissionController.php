@@ -13,12 +13,13 @@ class RolePermissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-  
+
      public function index($roleId)
      {
- 
+
     $permissions = Permission::all();
-        $rolePermissions = Role::findOrFail($roleId)->permissions;
+    $guard_name = Role::findOrFail($roleId)->guard_name;
+    $rolePermissions = Role::findOrFail($roleId)->permissions;
 
         if (count($rolePermissions) > 0) {
             foreach ($permissions as $permission) {
@@ -31,7 +32,7 @@ class RolePermissionController extends Controller
             }
         }
 
-        return response()->view('cms.spaity.role.role-permission', ['roleId' => $roleId, 'permissions' => $permissions]);
+        return response()->view('cms.spaity.role.role-permission', ['roleId' => $roleId, 'guard_name' => $guard_name, 'permissions' => $permissions]);
     }
 
     /**
