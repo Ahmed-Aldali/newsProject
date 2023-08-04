@@ -16,6 +16,7 @@ class CommentController extends Controller
     public function index()
     {
         $comments = Comment::orderBy('id' , 'desc')->paginate(10);
+        $this->authorize('viewAny',Comment::class);
         return response()->view('cms.comment.index' , compact('comments'));
     }
 
@@ -26,7 +27,7 @@ class CommentController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('create',Comment::class);
     }
 
     /**
@@ -59,7 +60,7 @@ class CommentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $this->authorize('update',Comment::class);
     }
 
     /**
@@ -82,6 +83,7 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete',Comment::class);
         $comments = Comment::destroy($id);
     }
 }

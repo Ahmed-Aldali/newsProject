@@ -17,7 +17,7 @@ class CityController extends Controller
     public function index()
     {
         $cities = City::with('country')->OrderBy('id' , 'desc')->paginate(10);
-
+        $this->authorize('viewAny',City::class);
         return response()->view('cms.city.index' , compact('cities'));
     }
 
@@ -28,8 +28,9 @@ class CityController extends Controller
      */
     public function create()
     {
-        
+
         $countries = Country::all();
+        $this->authorize('create',City::class);
         return response()->view('cms.city.create' , compact('countries'));
     }
 
@@ -103,6 +104,7 @@ class CityController extends Controller
     {
         $cities = City::findOrFail($id);
         $countries = Country::all();
+        $this->authorize('update',City::class);
         return response()->view('cms.city.edit' , compact('cities' , 'countries'));
     }
 
@@ -135,7 +137,7 @@ class CityController extends Controller
         }
         else {
             return response()->json([
-                'icon' => 'error' , 
+                'icon' => 'error' ,
                 'title' => $validator->getMessageBag()->first()
             ] , 400);
         }
@@ -149,6 +151,7 @@ class CityController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete',City::class);
         $cities = City::destroy($id);
     }
 }

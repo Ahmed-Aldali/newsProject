@@ -19,22 +19,7 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-
-        // Admin::create([
-        //     'email' => 'admin1@a.com',
-        //     'password' => Hash::make('123456'),
-            // 'first_name' => 'ali',
-            // 'last_name' => 'moh',
-            // 'gender' => 'Male',
-            // 'mobile' => '059966785',
-            // 'status' => 'Active',
-            // 'date' => 'ali',
-            // 'address' => 'test',
-            // 'city_id' => '1',
-
-        // ]);
-
-        $admins = new Admin();
+            $admins = new Admin();
             $admins->email = 'test@admin.com';
             $admins->password = Hash::make('12345678');
             $admins->save();
@@ -52,6 +37,22 @@ class AdminSeeder extends Seeder
             $users->city_id = '1';
             $users->actor()->associate($admins);
             $users->save();
+
+
+             // Admin::create([
+        //     'email' => 'admin1@a.com',
+        //     'password' => Hash::make('123456'),
+            // 'first_name' => 'ali',
+            // 'last_name' => 'moh',
+            // 'gender' => 'Male',
+            // 'mobile' => '059966785',
+            // 'status' => 'Active',
+            // 'date' => 'ali',
+            // 'address' => 'test',
+            // 'city_id' => '1',
+
+        // ]);
+
 
     }
 }

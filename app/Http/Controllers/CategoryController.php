@@ -15,6 +15,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::withcount('articles')->orderBy('id' , 'desc')->paginate(10);
+        $this->authorize('viewAny',Category::class);
         return response()->view('cms.category.index' , compact('categories'));
     }
 
@@ -25,6 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        $this->authorize('create',Category::class);
         return response()->view('cms.category.create');
     }
 
@@ -86,6 +88,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $categories = Category::findOrFail($id);
+        $this->authorize('update',Category::class);
         return response()->view('cms.category.edit' , compact('categories'));
     }
 
@@ -131,6 +134,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete',Category::class);
         $categories = Category::destroy($id);
     }
 }

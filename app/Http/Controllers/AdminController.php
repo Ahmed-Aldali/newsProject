@@ -19,7 +19,7 @@ class AdminController extends Controller
     public function index()
     {
         $admins = Admin::orderBy('id' , 'desc')->paginate(10);
-
+        $this->authorize('viewAny',Admin::class);
         return response()->view('cms.admin.index' , compact('admins'));
     }
 
@@ -32,7 +32,7 @@ class AdminController extends Controller
     {
         $cities = City::all();
         $roles = Role::where('guard_name' , 'admin')->get();
-
+        $this->authorize('create',Admin::class);
         return response()->view('cms.admin.create' , compact('cities' , 'roles'));
 
     }
@@ -138,7 +138,7 @@ class AdminController extends Controller
     {
         $cities= City::all();
         $admins = Admin::findOrFail($id);
-
+        $this->authorize('update',Admin::class);
         return response()->view('cms.admin.edit' , compact('cities' , 'admins'));
     }
 
@@ -226,6 +226,7 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete',Admin::class);
         $admins = Admin::destroy($id);
     }
 }

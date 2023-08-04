@@ -25,7 +25,7 @@ class PermissionController extends Controller
             $permissions = Permission::where('guard_name', 'like', '%' . $request->guard_name . '%');
                                 //  ->Orwhere('code', 'like', '%' . $request->code . '%');
         }
-       
+
 
         $permissions = $permissions->paginate(5);
         return response()->view('cms.spaity.permission.index' , compact('permissions'));

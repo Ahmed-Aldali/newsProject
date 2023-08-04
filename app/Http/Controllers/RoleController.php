@@ -25,7 +25,7 @@ class RoleController extends Controller
             $roles = Role::where('guard_name', 'like', '%' . $request->guard_name . '%');
                                 //  ->Orwhere('code', 'like', '%' . $request->code . '%');
         }
-       
+
 
         $roles = $roles->paginate(5);
         return response()->view('cms.spaity.role.index' , compact('roles'));

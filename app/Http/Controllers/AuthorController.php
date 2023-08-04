@@ -20,6 +20,7 @@ class AuthorController extends Controller
     {
         $authors = Author::withCount('articles')->orderBy('id' , 'desc')->paginate(10);
 
+        $this->authorize('viewAny',Author::class);
         return response()->view('cms.author.index' , compact('authors'));
     }
 
@@ -32,7 +33,7 @@ class AuthorController extends Controller
     {
         $cities = City::all();
         $roles = Role::where('guard_name' , 'author')->get();
-
+        $this->authorize('create',Author::class);
         return response()->view('cms.author.create' , compact('cities' , 'roles'));
 
     }
@@ -138,7 +139,7 @@ class AuthorController extends Controller
     {
         $cities= City::all();
         $authors = Author::findOrFail($id);
-
+        $this->authorize('update',Author::class);
         return response()->view('cms.author.edit' , compact('cities' , 'authors'));
     }
 
@@ -226,6 +227,7 @@ class AuthorController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete',Author::class);
         $authors = Author::destroy($id);
     }
 }

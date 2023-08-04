@@ -16,7 +16,7 @@ class SliderController extends Controller
     public function index()
     {
         $sliders = Slider::orderBy('id' , 'desc')->paginate(10);
-
+        $this->authorize('viewAny',Slider::class);
         return response()->view('cms.slider.index' , compact('sliders'));
     }
 
@@ -27,6 +27,8 @@ class SliderController extends Controller
      */
     public function create()
     {
+        $this->authorize('create',Slider::class);
+
         return response()->view('cms.slider.create');
     }
 
@@ -97,6 +99,7 @@ class SliderController extends Controller
     public function edit($id)
     {
         $sliders = Slider::findOrFail($id);
+        $this->authorize('update',Slider::class);
 
         return response()->view('cms.slider.edit' , compact('sliders'));
     }
@@ -155,6 +158,7 @@ class SliderController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete',Slider::class);
 
         $sliders = Slider::destroy($id);
     }

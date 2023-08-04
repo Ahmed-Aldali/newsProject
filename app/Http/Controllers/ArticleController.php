@@ -19,6 +19,7 @@ class ArticleController extends Controller
      {
          //
          $articles = Article::where('author_id', $id)->orderBy('created_at', 'desc')->paginate(4);
+
          return response()->view('cms.article.index', compact('articles','id'));
      }
 
@@ -41,7 +42,7 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::orderBy('id' , 'desc')->paginate(4);
-
+        $this->authorize('viewAny',Article::class);
         return response()->view('cms.article.indexAll' , compact('articles'));
     }
 
@@ -54,7 +55,7 @@ class ArticleController extends Controller
     {
         $authors = Author::all();
         $categories = Category::where('status' , 'active')->get();
-
+        $this->authorize('create',Article::class);
         return response()->view('cms.article.create' , compact('authors' , 'categories'));
 
     }
@@ -134,7 +135,7 @@ class ArticleController extends Controller
         $authors = Author::all();
         $categories = Category::where('status' , 'active')->get();
         $articles = Article::findOrFail($id);
-
+        $this->authorize('update',Article::class);
         return response()->view('cms.article.edit' , compact('authors' , 'categories' , 'articles'));
 
     }
@@ -197,6 +198,7 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete',Article::class);
         $articles = Article::destroy($id);
     }
 }

@@ -56,23 +56,22 @@
                             @foreach ($permissions as $permission)
                             {{-- @dd($guard_name) --}}
                             @if($permission->guard_name ==  $guard_name)
-                            <tr>
-                                {{-- <span class="tag tag-success">Approved</span>s --}}
-                                <td>{{$permission->id}}</td>
-                                <td>{{$permission->name}}</td>
-                                <td>{{$permission->guard_name}}</td>
-                                <td>
-                                  <div class="icheck-primary d-inline">
-                                    <input type="checkbox" id="permission_{{$permission->id}}"
-                                      onchange="storeRolePermission({{$roleId}},{{$permission->id}})" @if($permission->active) checked
-                                    @endif>
-                                    <label for="permission_{{$permission->id}}">
-                                    </label>
-                                  </div>
-                                </td>
+                                <tr>
+                                    {{-- <span class="tag tag-success">Approved</span>s --}}
+                                    <td>{{$permission->id}}</td>
+                                    <td>{{$permission->name}}</td>
+                                    <td>{{$permission->guard_name}}</td>
+                                    <td>
+                                        <div class="icheck-primary d-inline">
+                                            <input type="checkbox" id="permission_{{$permission->id}}"
+                                            onchange="storeRolePermission({{$roleId}},{{$permission->id}})"
+                                            @if($permission->active) checked @endif>
+                                            <label for="permission_{{$permission->id}}"></label>
+                                        </div>
+                                    </td>
                               </tr>
 
-                              @endif
+                            @endif
 
                             @endforeach
                           </tbody>

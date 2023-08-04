@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
+use App\Models\Category;
 use App\Models\Country;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
@@ -18,6 +20,7 @@ class CountryController extends Controller
         $countries = Country::withCount('cities')->orderBy('id' , 'desc');
 
 
+
         if ($request->get('name')) {
             $countries = Country::where('name', 'like', '%' . $request->name . '%');
                                 //  ->Orwhere('code', 'like', '%' . $request->code . '%');
@@ -32,6 +35,7 @@ class CountryController extends Controller
         }
 
         $countries = $countries->paginate(5);
+        $this->authorize('viewAny',Country::class);
         return response()->view('cms.country.index' , compact('countries'));
 
     }
@@ -43,6 +47,7 @@ class CountryController extends Controller
      */
     public function create()
     {
+        $this->authorize('create',Country::class);
         return response()->view('cms.country.create');
     }
 
@@ -111,6 +116,7 @@ class CountryController extends Controller
     public function edit($id)
     {
         $countries = Country::findOrFail($id);
+        $this->authorize('update',Country::class);
         return response()->view('cms.country.edit' , compact('countries'));
     }
 
@@ -150,6 +156,7 @@ class CountryController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete',Country::class);
         $countries = Country::destroy($id);
     }
 }
