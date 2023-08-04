@@ -61,6 +61,8 @@
                 <input hidden id="user_id" name="user_id" value="10">
 
               </form>
+
+
             </div>
           </div>
 
@@ -68,8 +70,8 @@
           @foreach ( $comments as $comment)
           <div class="media mb-4">
             <img class="img-circle elevation-2" width="30" src="{{asset('storage/images/author/'.$comment->user->image)}}" alt="">
-            <div class="media-body">
-              <h5 class="mt-0">{{ $comment->user->first_name }}</h5>
+            <div class="media-body pl-3">
+              <h5 class="mt-0">{{ $comment->user->first_name }} {{ $comment->user->last_name }}</h5>
               {{ $comment->comment }}
             </div>
           </div>
@@ -137,7 +139,10 @@
             formData.append('user_id',document.getElementById('user_id').value);
 
             store('/news/storeComment' , formData);
+
         }
+
+
     </script>
 
     @endsection

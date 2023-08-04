@@ -89,7 +89,7 @@
       <div class="card">
         <div class="card-header">
           {{-- <a href="{{route('countries.create')}}" type="submit" class="btn btn-info">Add New Country</a> --}}
-     
+
           <form action="" method="get" style="margin-bottom:2%;">
             <div class="row">
                 <div class="input-icon col-md-2">
@@ -116,7 +116,7 @@
                       </span>
                     </div>
 
-                   
+
             <div class="col-md-4">
                   <button class="btn btn-success btn-md" type="submit"> Filter</button>
                   <a href="{{route('countries.index')}}"  class="btn btn-danger">End Filter</a>
