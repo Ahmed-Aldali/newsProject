@@ -134,7 +134,7 @@
                         article/s</a> </td>
                     <td>
                         <div class="btn-group">
-                          <a href="{{route('authors.edit' , $author->id )}}" type="button" class="btn btn-info">edit</a>
+                          {{-- <a href="{{route('authors.edit' , $author->id )}}" type="button" class="btn btn-info">edit</a> --}}
                           <button type="button" onclick="performDestroy({{$author->id }} , this)" class="btn btn-danger">delete</button>
                           {{-- <button type="button" class="btn btn-success">show</button> --}}
                         </div>

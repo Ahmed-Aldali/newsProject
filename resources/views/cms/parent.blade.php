@@ -607,12 +607,15 @@
         @endCanAny
 
           <li class="nav-header">Setting</li>
-          <li class="nav-item">
-            <a href="iframe.html" class="nav-link">
-              <i class="nav-icon fas fa-user-edit"></i>
-              <p>Edit Profile</p>
-            </a>
-          </li>
+
+            <li class="nav-item">
+                <a href="{{ route('edit-profile') }}" class="nav-link">
+                <i class="nav-icon fas fa-user-edit"></i>
+                <p>Edit Profile</p>
+                </a>
+            </li>
+
+
 
           <li class="nav-item">
             <a href="iframe.html" class="nav-link">

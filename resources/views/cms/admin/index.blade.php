@@ -98,7 +98,7 @@
             <thead>
               <tr>
                 <th style="width: 10px">id</th>
-               
+
                 <th>Image</th>
                 <th>First Name</th>
                 <th>Last Name</th>
@@ -135,9 +135,9 @@
 
                     <td>
                         <div class="btn-group">
-                          @can('Edit-Admin')
+                          {{-- @can('Edit-Admin')
                           <a href="{{route('admins.edit' , $admin->id )}}" type="button" class="btn btn-info">edit</a>
-                          @endcan
+                          @endcan --}}
                           @can('Delete-Admin')
                           <button type="button" onclick="performDestroy({{$admin->id }} , this)" class="btn btn-danger">delete</button>
                           @endcan

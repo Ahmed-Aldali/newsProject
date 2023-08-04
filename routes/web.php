@@ -43,6 +43,13 @@ Route::prefix('cms/')->middleware('guest:admin,author')->group(function(){
 Route::prefix('cms/')->middleware('auth:admin,author')->group(function(){
     Route::get('logout' , [UserAuthController::class , 'logout'])->name('logout');
 
+    Route::get('edit-profile' , [UserAuthController::class , 'editProfile'])->name('edit-profile');
+    Route::post('update-profile' , [UserAuthController::class , 'updateProfile'])->name('update-profile');
+
+
+    Route::get('Change-password' , [UserAuthController::class , 'changePassword'])->name('change-password');
+    Route::post('update-password' , [UserAuthController::class , 'updatePassword'])->name('update-password');
+
 });
 Route::prefix('cms')->middleware('auth:admin,author')->group(function(){
     Route::view('/home' , 'cms.home')->name('home');

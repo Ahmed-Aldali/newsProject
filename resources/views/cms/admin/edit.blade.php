@@ -43,7 +43,7 @@
                       </select>
                     </div>
                     <!-- /.form-group -->
-                
+
                     <!-- /.form-group -->
                   </div>
                 </div>
@@ -52,7 +52,7 @@
 
                   <div class="form-group col-md-6">
                     <label for="first_name">First Name of Admin</label>
-                  <input type="text" class="form-control" name="first_name" id="first_name" 
+                  <input type="text" class="form-control" name="first_name" id="first_name"
                   value="{{ $admins->user->first_name }}" placeholder="Enter Name of Admin">
                 </div>
                 <div class="form-group col-md-6">
@@ -66,7 +66,7 @@
 
                     <div class="form-group col-md-6">
                       <label for="email">Email of Admin</label>
-                    <input type="email" class="form-control" name="email" id="email" 
+                    <input type="email" class="form-control" name="email" id="email"
                     value="{{ $admins->email }}" placeholder="Enter Name of Admin">
                   </div>
                   {{-- <div class="form-group col-md-6">
@@ -78,7 +78,7 @@
 
                     <div class="form-group col-md-6">
                       <label for="mobile">Mobile of Admin</label>
-                    <input type="text" class="form-control" name="mobile" id="mobile" 
+                    <input type="text" class="form-control" name="mobile" id="mobile"
                     value="{{ $admins->user->mobile }}" placeholder="Enter Name of Admin">
                   </div>
                   <div class="form-group col-md-6">
@@ -117,12 +117,12 @@
                     <label for="status">Status</label>
                     <select name="status" id="status" class="form-select form-select-sm" style="width: 100%;">
                       <option selected> {{ $admins->user->status }} </option>
-  
+
                       <option value="Active">Active</option>
                         <option value="Inactive">In Active</option>
                     </select>
                 </div>
-                
+
             </div>
 
             </div>
@@ -131,7 +131,7 @@
               <!-- /.card-body -->
 
               <div class="card-footer">
-                <button type="button" onclick=" performUpdate({{ $admins->id }}) " class="btn btn-primary">Store</button>
+                <button type="button" onclick=" performUpdate() " class="btn btn-primary">update</button>
 
                 <a href="{{route('admins.index')}}" type="submit" class="btn btn-info">Cancel</a>
 
@@ -156,7 +156,7 @@
 @section('scripts')
 
 <script>
-     function performUpdate(id){
+     function performUpdate(){
         let formData = new FormData();
 
         formData.append('first_name',document.getElementById('first_name').value );
@@ -172,7 +172,7 @@
         formData.append('image',document.getElementById('image').files[0] );
 
 
-        storeRoute('/cms/admins-update/' + id , formData);
+        storeRoute('/cms/update-profile' , formData);
     }
 </script>
 
