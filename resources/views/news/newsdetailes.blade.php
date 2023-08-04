@@ -58,7 +58,7 @@
                   <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
                 </div>
                 <button type="button" onclick="performStore({{ $articles->id }})" class="btn btn-primary">Comment</button>
-                <input hidden id="user_id" name="user_id" value="10">
+                <input hidden id="user_id" name="user_id" value="1">
 
               </form>
 
