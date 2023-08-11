@@ -201,11 +201,11 @@ class AdminController extends Controller
 
                 return ['redirect' => route('admins.index')];
 
-                return response()->json([
-                    'icon' => 'success' ,
-                    'title' => 'Updated is Successfully'
+                // return response()->json([
+                //     'icon' => 'success' ,
+                //     'title' => 'Updated is Successfully'
 
-                ] , 200);
+                // ] , 200);
 
 
             }

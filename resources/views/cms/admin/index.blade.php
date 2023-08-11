@@ -119,7 +119,14 @@
                 <tr>
                     <td>{{$admin->id  }}</td>
                     <td>
-                      <img class="img-circle img-bordered-sm" src="{{asset('storage/images/admin/'.$admin->user->image)}}" width="50" height="50" alt="User Image">
+                      <img class="img-circle img-bordered-sm"
+
+                      @if($admin->user)
+                      src="{{asset('storage/images/admin/'.$admin->user->image)}}"
+                      @else
+                      src=""
+                      @endif
+                      width="50" height="50" alt="User Image">
                   </td>
                     <td>{{ $admin->user->first_name ?? ""}}</td>
                     <td>{{ $admin->user->last_name ?? ""}}</td>

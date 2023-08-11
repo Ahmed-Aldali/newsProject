@@ -68,13 +68,15 @@
 
           <!-- Single Comment -->
           @foreach ( $comments as $comment)
+          @if($comment->user)
           <div class="media mb-4">
-            <img class="img-circle elevation-2" width="30" src="{{asset('storage/images/author/'.$comment->user->image)}}" alt="">
+            <img class="img-circle elevation-2" width="30" src="{{$comment->user ? asset('storage/images/author/'.$comment->user->image ) : ""}}" alt="">
             <div class="media-body pl-3">
-              <h5 class="mt-0">{{ $comment->user->first_name }} {{ $comment->user->last_name }}</h5>
+              {{-- <h5 class="mt-0">{{ $comment->user->first_name }} {{ $comment->user->last_name }}</h5> --}}
               {{ $comment->comment }}
             </div>
           </div>
+          @endif
           @endforeach
 
 

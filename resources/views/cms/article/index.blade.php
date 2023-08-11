@@ -51,7 +51,7 @@
 
                     <td>
                         <div class="btn-group">
-                          <a href="{{route('categories.edit' , $article->id )}}" type="button" class="btn btn-info">edit</a>
+                          <a href="{{route('articles.edit' , $article->id )}}" type="button" class="btn btn-info">edit</a>
                           <button type="button" onclick="performDestroy({{$article->id }} , this)" class="btn btn-danger">delete</button>
                           <button type="button" class="btn btn-success">show</button>
                         </div>

@@ -15,6 +15,13 @@ class ArticleController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function index()
+    {
+        $articles = Article::orderBy('id' , 'desc')->paginate(4);
+        $this->authorize('viewAny',Article::class);
+        return response()->view('cms.article.indexAll' , compact('articles'));
+    }
+
      public function indexArticle($id)
      {
          //
@@ -39,12 +46,6 @@ class ArticleController extends Controller
 
      }
 
-    public function index()
-    {
-        $articles = Article::orderBy('id' , 'desc')->paginate(4);
-        $this->authorize('viewAny',Article::class);
-        return response()->view('cms.article.indexAll' , compact('articles'));
-    }
 
     /**
      * Show the form for creating a new resource.

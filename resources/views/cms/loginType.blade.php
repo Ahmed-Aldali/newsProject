@@ -27,19 +27,25 @@
   <link rel="stylesheet" href="{{ asset('cms/plugins/summernote/summernote-bs4.min.css') }}">
   @yield('styles')
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition login-page">
 
-    <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">Select Your Account</h3>
+    <div class="login-box">
+        <div class="login-logo">
+          <a href=""><b>Login Type</b></a>
         </div>
-        <div class="card-body row">
-          <div class="col-md-2">
-            <a type="button" href="{{ route('login.view','admin') }}" class="btn btn-outline-primary btn-block"><i class="fa fa-bell"></i>  Admin</a>
+        <!-- /.login-logo -->
+        <div class="card">
+          <div class="card-body login-card-body">
+             <div class="row">
+              <div class="col-6">
+                  <a  href="{{route('login.view','admin')}}" class="btn btn-primary btn-block">Admin</a>
+                </div>
+                <div class="col-6">
+                  <a  href="{{route('login.view','author')}}" class="btn btn-primary btn-block">Author</a>
+                </div>
+             </div>
           </div>
-          <div class="col-md-2">
-            <a type="button" href="{{ route('login.view','author') }}" class="btn btn-outline-primary btn-block"><i class="fa fa-bell"></i>  Author</a>
-          </div>
+          <!-- /.login-card-body -->
         </div>
       </div>
 

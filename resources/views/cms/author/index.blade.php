@@ -117,8 +117,16 @@
                 <tr>
                     <td>{{$author->id  }}</td>
                     <td>
-                      <img class="img-circle img-bordered-sm" src="{{asset('storage/images/author/'.$author->user->image)}}" width="50" height="50" alt="User Image">
-                  </td>
+                        <img class="img-circle img-bordered-sm"
+
+                        @if($author->user)
+                        src="{{asset('storage/images/author/'.$author->user->image)}}"
+                        @else
+                        src=""
+                        @endif
+                        width="50" height="50" alt="User Image">
+                    </td>
+
                     <td>{{ $author->user->first_name ?? ""}}</td>
                     <td>{{ $author->user->last_name ?? ""}}</td>
                     <td>{{ $author->email }}</td>

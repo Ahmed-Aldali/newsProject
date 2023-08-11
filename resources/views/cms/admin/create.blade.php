@@ -55,7 +55,7 @@
 
                         @endforeach
 
-                      </select>
+                      </select> 
                     </div>
                     <!-- /.form-group -->
 

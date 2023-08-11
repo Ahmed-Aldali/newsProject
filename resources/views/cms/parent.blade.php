@@ -166,12 +166,11 @@
       {{-- <img src="{{asset('cms/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> --}}
       <span class="brand-text font-weight-light">
         @if(auth('admin')->check())
-            Admin Control
-            @endif
-            @if(auth('author')->check())
-            Author Control
-
-            @endif
+            Admin Control Panel
+        @endif
+        @if(auth('author')->check())
+            Author Control Panel
+        @endif
       </span>
     </a>
 
@@ -182,11 +181,9 @@
         <div class="image">
             @if(auth('admin')->check())
             <img src="{{asset('storage/images/admin/'.Auth::user()->user->image)}} " class="img-circle elevation-2" alt="User Image">
-
             @endif
             @if(auth('author')->check())
             <img src="{{asset('storage/images/author/'.Auth::user()->user->image)}}" class="img-circle elevation-2" alt="User Image">
-
             @endif
         </div>
         <div class="info">
@@ -236,9 +233,6 @@
           {{-- @canAny(['Index-Role' , 'Create-Role']) --}}
           <li class="nav-item">
             <a href="#" class="nav-link">
-              {{-- <i class="nav-icon fas fa-user-crown"></i> --}}
-              {{-- <i class="fas fa-city"></i> --}}
-              {{-- <i class=" nav-icon fal fa-user-crown" style="color: #cdd2da;"></i> --}}
               <i class="nav-icon fas fa-users-slash"></i>
               <p>
                 Roles
@@ -316,10 +310,10 @@
               {{-- <i class="fas fa-city"></i> --}}
               {{-- <i class=" nav-icon fal fa-user-crown" style="color: #cdd2da;"></i> --}}
               <i class="nav-icon fas fa-user-tie"></i>
-              <p>
-                Admin
+              <span>Admin</span>
+              <span class="badge badge badge-info badge-pill right mr-4">{{App\Models\Admin::count()}}</span>
                 <i class="fas fa-angle-left right"></i>
-              </p>
+
             </a>
             <ul class="nav nav-treeview">
               @can('Index-Admin')
@@ -351,13 +345,10 @@
             <a href="#" class="nav-link">
               {{-- <i class="nav-icon fas fa-user-crown"></i> --}}
               <i class="nav-icon fas fa-user-edit"></i>
-              {{-- <i class="fas fa-city"></i> --}}
-              {{-- <i class=" nav-icon fal fa-user-crown" style="color: #cdd2da;"></i> --}}
-              {{-- <i class="nav-icon far fa-user-crown"></i> --}}
-              <p>
-                Author
+              <span>Author</span>
+              <span class="badge badge badge-info badge-pill right mr-4">{{App\Models\Author::count()}}</span>
                 <i class="fas fa-angle-left right"></i>
-              </p>
+
             </a>
             <ul class="nav nav-treeview">
                 @can('Index-Author')
@@ -393,10 +384,10 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-city"></i>
               {{-- <i class="fas fa-city"></i> --}}
-              <p>
-                City
+              <span>City</span>
+              <span class="badge badge badge-info badge-pill right mr-4">{{App\Models\City::count()}}</span>
                 <i class="fas fa-angle-left right"></i>
-              </p>
+
             </a>
             <ul class="nav nav-treeview">
               @can('Index-City')
@@ -428,10 +419,10 @@
               {{-- <i class="nav-icon fas fa-city"></i> --}}
               <i class="nav-icon far fa-flag"></i>
               {{-- <i class="fas fa-city"></i> --}}
-              <p>
-                Country
+              <span>Country</span>
+              <span class="badge badge badge-info badge-pill right mr-4">{{App\Models\Country::count()}}</span>
                 <i class="fas fa-angle-left right"></i>
-              </p>
+
             </a>
             <ul class="nav nav-treeview">
                 @can('Index-Country')
@@ -463,11 +454,11 @@
               {{-- <i class="nav-icon fas fa-city"></i> --}}
               <i class="nav-icon fas fa-book"></i>
               {{-- <i class="fas fa-city"></i> --}}
-              <p>
-                Category
+              <span>Category</span>
+              <span class="badge badge badge-info badge-pill right mr-4">{{App\Models\Category::count()}}</span>
                 <i class="fas fa-angle-left right"></i>
                 {{-- <i class="fas fa-book"></i> --}}
-              </p>
+
             </a>
             <ul class="nav nav-treeview">
                 @can('Index-Category')
@@ -499,10 +490,10 @@
               {{-- <i class="nav-icon fas fa-city"></i> --}}
               <i class="nav-icon far fa-newspaper"></i>
               {{-- <i class="fas fa-city"></i> --}}
-              <p>
-                Article
+              <span>Article</span>
+              <span class="badge badge badge-info badge-pill right mr-4">{{App\Models\Article::count()}}</span>
                 <i class="fas fa-angle-left right"></i>
-              </p>
+
             </a>
             <ul class="nav nav-treeview">
                 @can('Create-Article')
@@ -550,10 +541,10 @@
               {{-- <i class="nav-icon fas fa-city"></i> --}}
               <i class="nav-icon far fa-images"></i>
               {{-- <i class="fas fa-city"></i> --}}
-              <p>
-                Slider
+              <span>Slider</span>
+              <span class="badge badge badge-info badge-pill right mr-4">{{App\Models\Slider::count()}}</span>
                 <i class="fas fa-angle-left right"></i>
-              </p>
+
             </a>
             <ul class="nav nav-treeview">
                 @can('Index-Slider')
@@ -585,10 +576,10 @@
               {{-- <i class="nav-icon fas fa-city"></i> --}}
               <i class="nav-icon fas fa-envelope"></i>
               {{-- <i class="fas fa-city"></i> --}}
-              <p>
-                Contacts
+              <span>Contact</span>
+              <span class="badge badge badge-info badge-pill right mr-4">{{App\Models\Contact::count()}}</span>
                 <i class="fas fa-angle-left right"></i>
-              </p>
+
             </a>
             <ul class="nav nav-treeview">
                 @can('Index-Slider')
@@ -665,6 +656,7 @@
     @yield('content')
     <!-- /.content -->
   </div>
+</div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <strong>Copyright &copy; {{ now()->year }} - {{ now()->year +1 }} <a href="{{ route('home') }}">{{env('APP_NAME')}}</a>.</strong>
