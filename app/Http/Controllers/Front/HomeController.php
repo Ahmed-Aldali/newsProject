@@ -87,6 +87,7 @@ class HomeController extends Controller
                 $isSaved = $comments->save();
 
                 if($isSaved){
+
                     return response()->json([
                         'icon' => 'success' ,
                         'title' => "Created is Successfully" ,

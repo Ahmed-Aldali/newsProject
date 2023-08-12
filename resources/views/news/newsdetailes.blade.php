@@ -141,6 +141,7 @@
             formData.append('user_id',document.getElementById('user_id').value);
 
             store('/news/storeComment' , formData);
+            window.location.reload();
 
         }
 
