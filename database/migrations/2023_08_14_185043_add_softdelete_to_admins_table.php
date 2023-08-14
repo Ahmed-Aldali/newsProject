@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddUserIdToCommentsTable extends Migration
+class AddSoftdeleteToAdminsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class AddUserIdToCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::table('comments', function (Blueprint $table) {
-            // $table->foreignId('user_id')->default('0');
-            // $table->foreign('user_id')->on('users')->references('id')->cascadeOnDelete();
-
+        Schema::table('admins', function (Blueprint $table) {
+            $table->softDeletes();
         });
     }
 
@@ -27,7 +25,7 @@ class AddUserIdToCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::table('comments', function (Blueprint $table) {
+        Schema::table('admins', function (Blueprint $table) {
             //
         });
     }

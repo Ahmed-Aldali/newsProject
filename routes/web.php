@@ -62,6 +62,13 @@ Route::prefix('cms')->middleware('auth:admin,author')->group(function(){
 
     Route::resource('admins' , AdminController::class);
     Route::post('admins-update/{id}' , [AdminController::class , 'update'])->name('admins-update');
+    Route::get('indexTrash' , [AdminController::class , 'indexTrash'])->name('indexTrash');
+    Route::get('admins_restore/{id}',[AdminController::class , 'restore'])->name('admins.restore');
+    Route::get('admins_restoreAll',[AdminController::class , 'restoreAll'])->name('admins.restoreAll');
+    Route::get('admins_forceDelete/{id}',[AdminController::class , 'forceDelete'])->name('admins.forceDelete');
+    Route::get('admins_forceDeleteAll',[AdminController::class , 'forceDeleteAll'])->name('admins.forceDeleteAll');
+
+
 
     Route::resource('authors' , AuthorController::class);
     Route::post('authors-update/{id}' , [AuthorController::class , 'update'])->name('authors-update');

@@ -1,10 +1,10 @@
 @extends('cms.parent')
 
-@section('title' , 'Index Admin')
+@section('title' , 'Index Admin Deleted')
 
-@section('main_title' , 'Index Admin')
+@section('main_title' , 'Index Admin Deleted')
 
-@section('sub_title' , 'index of Admin')
+@section('sub_title' , 'index of Admin Deleted')
 
 
 @section('styles')
@@ -17,10 +17,12 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          @can('Create-Admin')
-          <a href="{{route('admins.create')}}" type="submit" class="btn btn-info">Add New Admin</a>
-          <a href="{{route('indexTrash')}}" type="submit" class="btn btn-info">Trashed</a>
-          @endcan
+          {{-- @can('Create-Admin') --}}
+          <a href="{{route('admins.index')}}" type="submit" class="btn btn-info">Admins Index</a>
+          <a href="{{route('admins.restoreAll')}}" type="submit" class="btn btn-info">Restore All</a>
+          <a href="{{route('admins.forceDeleteAll')}}" type="submit" class="btn btn-danger">Delete All</a>
+
+          {{-- @endcan --}}
         </div>
         <!-- /.card-header -->
         <div class="card-body">
@@ -36,7 +38,6 @@
                 <th>Gender</th>
                 <th>Status</th>
                 <th>mobile</th>
-                <th>City Name</th>
 
 
                 <th>Setting</th>
@@ -67,17 +68,17 @@
                     {{-- <td>{{ $admin->user ? $admin->user->mobile : "" }}</td> --}}
 
                     {{-- <td>{{ $Admin->country->name }}</td> --}}
-                    <td><span class="badge bg-success"> {{$admin->user->city->name ?? ""}}</span></td>
 
 
                     <td>
                         <div class="btn-group">
-                          {{-- @can('Edit-Admin')
-                          <a href="{{route('admins.edit' , $admin->id )}}" type="button" class="btn btn-info">edit</a>
-                          @endcan --}}
-                          @can('Delete-Admin')
-                          <button type="button" onclick="performDestroy({{$admin->id }} , this)" class="btn btn-danger">delete</button>
-                          @endcan
+                          {{-- @can('Edit-Admin') --}}
+                          <a href="{{route('admins.restore' , $admin->id )}}" type="button" class="btn btn-info">restore</a>
+                          <a href="{{route('admins.forceDelete' , $admin->id )}}" type="button" class="btn btn-danger ml-2">delete</a>
+                          {{-- @endcan --}}
+                          {{-- @can('Delete-Admin') --}}
+                          {{-- <button type="button" onclick="performDestroy({{$admin->id }} , this)" class="btn btn-danger">delete</button> --}}
+                          {{-- @endcan --}}
                           {{-- <button type="button" class="btn btn-success">show</button> --}}
                         </div>
                       </td>
@@ -107,11 +108,7 @@
 @section('scripts')
 
 <script>
-    function performDestroy(id , reference){
 
-        confirmDestroy('/cms/admins/'+id  ,reference );
-
-    }
 
     </script>
 @endsection

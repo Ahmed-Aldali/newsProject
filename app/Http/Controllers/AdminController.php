@@ -7,6 +7,7 @@ use App\Models\City;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 use Spatie\Permission\Models\Role;
 
 class AdminController extends Controller
@@ -227,6 +228,58 @@ class AdminController extends Controller
     public function destroy($id)
     {
         $this->authorize('delete',Admin::class);
-        $admins = Admin::destroy($id);
+        $admins = Admin::findOrFail($id)->delete();
     }
+
+
+
+//  softDeletes
+
+public function indexTrash()
+{
+    $admins = Admin::onlyTrashed()->orderBy('id' , 'desc')->paginate(10);
+    return response()->view('cms.admin.indexTrash' , compact('admins'));
+
+}
+
+
+
+// restore
+public function restore($id){
+    $admins = Admin::onlyTrashed()->findOrFail($id)->restore();
+    // return ['redirect' => route('indexTrash')];
+    return Redirect::back()->with(['success' => 'restored successfully']);
+}
+
+
+public function restoreAll(){
+    $admins = Admin::onlyTrashed()->restore();
+    // return ['redirect' => route('indexTrash')];
+    return Redirect::back()->with(['success' => 'restored All successfully']);
+}
+
+
+// force delete
+public function forceDelete($id){
+    $admins = Admin::onlyTrashed()->findOrFail($id)->forceDelete();
+    // return ['redirect' => route('indexTrash')];
+    return Redirect::back()->with(['success' => 'deleted successfully']);
+
+}
+public function forceDeleteAll(){
+    $admins = Admin::onlyTrashed()->forceDelete();
+    // return ['redirect' => route('indexTrash')];
+    return Redirect::back()->with(['success' => 'deleted All successfully']);
+
+}
+
+
+
+
+
+
+
+
+
+
 }
