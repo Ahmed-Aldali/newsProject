@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use App\Models\City;
+use App\Models\Language;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -33,8 +34,9 @@ class AdminController extends Controller
     {
         $cities = City::all();
         $roles = Role::where('guard_name' , 'admin')->get();
+        $languages = Language::where('status' , 'Active')->get();
         $this->authorize('create',Admin::class);
-        return response()->view('cms.admin.create' , compact('cities' , 'roles'));
+        return response()->view('cms.admin.create' , compact('cities' , 'roles' , 'languages'));
 
     }
 
@@ -47,6 +49,7 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
+
         $validator = Validator($request->all() , [
             'first_name' => 'required' ,
             'last_name' => 'required' ,
@@ -275,7 +278,10 @@ public function forceDeleteAll(){
 
 
 
+// many to many
+public function getAllLanguages(){
 
+}
 
 
 

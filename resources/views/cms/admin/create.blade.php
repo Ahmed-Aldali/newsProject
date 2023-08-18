@@ -28,39 +28,36 @@
             <form>
 
               <div class="card-body">
+
+
                 <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                        <label>City</label>
+                        <select class="form-control select2" id="city_id" name="city_id"  style="width: 100%;">
+                            @foreach ($cities as $city)
+                            <option value="{{ $city->id }}">{{ $city->name }}</option>
 
-                <div class="col-md-6">
-                    <div class="form-group">
-                      <label>City</label>
-                      <select class="form-control select2" id="city_id" name="city_id"  style="width: 100%;">
-                        @foreach ($cities as $city)
-                        <option value="{{ $city->id }}">{{ $city->name }}</option>
+                            @endforeach
 
-                        @endforeach
-
-                      </select>
+                        </select>
+                        </div>
                     </div>
-                    <!-- /.form-group -->
 
-                    <!-- /.form-group -->
-                  </div>
 
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Role NAme</label>
-                      <select class="form-control select2" id="role_id" name="role_id"  style="width: 100%;">
-                        @foreach ($roles as $role)
-                        <option value="{{ $role->id }}">{{ $role->name }}</option>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                        <label>Role NAme</label>
+                        <select class="form-control select2" id="role_id" name="role_id"  style="width: 100%;">
+                            @foreach ($roles as $role)
+                            <option value="{{ $role->id }}">{{ $role->name }}</option>
 
-                        @endforeach
+                            @endforeach
 
-                      </select> 
+                        </select>
+                        </div>
                     </div>
-                    <!-- /.form-group -->
 
-                    <!-- /.form-group -->
-                  </div>
                 </div>
 
                   <div class="row">
@@ -135,6 +132,36 @@
               </div>
               <!-- /.card-body -->
 
+{{--
+              <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                    <label>Languages</label>
+                    <select class="form-control select2" id="language_id" name="language_id[]"  style="width: 100%;">
+                        @foreach ($languages as $language)
+                        <option value="{{ $language->id }}">{{ $language->name }}</option>
+
+                        @endforeach
+
+                    </select>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                    <label>language level</label>
+                    <select class="form-control select2" id="level" name="level"  style="width: 100%;">
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                    </select>
+                    </div>
+                </div> --}}
+
+            </div>
+
+
               <div class="card-footer">
                 <button type="button" onclick="performStore()" class="btn btn-primary">Store</button>
 
@@ -175,6 +202,8 @@
         formData.append('password',document.getElementById('password').value );
         formData.append('city_id',document.getElementById('city_id').value );
         formData.append('role_id',document.getElementById('role_id').value );
+        // formData.append('language_id',document.getElementById('language_id').value );
+        // formData.append('level',document.getElementById('level').value );
         formData.append('image',document.getElementById('image').files[0] );
 
 

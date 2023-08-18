@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Author;
 use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -39,6 +40,7 @@ class ArticleController extends Controller
 
      public function createArticle($id)
      {
+
          $authors = Author::all();
          $categories = Category::where('status' , 'active')->get();
 
@@ -69,24 +71,21 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator($request->all() , [
 
-        ] , [
-
+        $validatedData = $request->validate([
+            'tags' => 'nullable|string',
         ]);
 
-        if(! $validator->fails()){
-            $articles = new Article();
+        $articles = new Article();
 
+        $tagNames = explode(',', $validatedData['tags']);
+        $value = array_values(array_unique($tagNames));
+        $articles->tags = json_encode($value);
+        
             if (request()->hasFile('image')) {
-
                 $image = $request->file('image');
-
                 $imageName = time() . 'image.' . $image->getClientOriginalExtension();
-
                 $image->move('storage/images/article', $imageName);
-                // $image->storeAs('storage/images/admin', $imageName);
-
                 $articles->image = $imageName;
                 }
 
@@ -95,23 +94,15 @@ class ArticleController extends Controller
             $articles->full_description = $request->get('full_description');
             $articles->category_id = $request->get('category_id');
             $articles->author_id = $request->get('author_id');
+           
 
             $isSaved = $articles->save();
 
             if($isSaved){
-                return response()->json([
-                    'icon' => 'success' ,
-                    'title' => 'Created is Successfully',
-                ] , 200);
+                return redirect()->back()->with('message', 'add successfully');
             }
 
-        }
-        else{
-            return response()->json([
-                'icon' => 'error' ,
-                'title' => $validator->getMessageBag()->first(),
-            ] , 400);
-        }
+       
     }
 
     /**
@@ -150,15 +141,15 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = Validator($request->all() , [
+        $validatedData = $request->validate([
+            'tags' => 'nullable|string',
+        ]);
 
-            ] , [
+        $articles = Article::findOrFail($id);
 
-            ]);
-
-            if(! $validator->fails()){
-
-                $articles = Article::findOrFail($id);
+        $tagNames = explode(',', $validatedData['tags']);
+        $value = array_values(array_unique($tagNames));
+        $articles->tags = json_encode($value , JSON_UNESCAPED_UNICODE);
 
                 if (request()->hasFile('image')) {
 
@@ -180,15 +171,11 @@ class ArticleController extends Controller
 
                 $isUpdate = $articles->save();
 
-                return ['redirect' => route('articles.index')];
+                if($isUpdate){
+                    return redirect()->back()->with('message', 'add successfully');
+                }
 
-            }
-            else{
-                return response()->json([
-                    'icon' => 'error' ,
-                    'title' => $validator->getMessageBag()->first(),
-                ] , 400);
-            }
+          
     }
 
     /**
@@ -202,4 +189,10 @@ class ArticleController extends Controller
         $this->authorize('delete',Article::class);
         $articles = Article::destroy($id);
     }
+
+
+
+
+    
+
 }

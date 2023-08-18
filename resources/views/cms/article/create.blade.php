@@ -8,7 +8,10 @@
 
 
 @section('styles')
-
+@section('styles')
+<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/thinline.css">
+<link rel="stylesheet" href="{{ asset('cms/css/tagsStyle.css') }}">
+@endsection
 @endsection
 
 @section('content')
@@ -25,7 +28,8 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form>
+            <form action="{{ route('articles.store') }}" method="post">
+                @csrf
               <div class="card-body">
 
                 <div class="row">
@@ -36,13 +40,13 @@
                         <select class="form-control select2" id="category_id" name="category_id"  style="width: 100%;">
                           @foreach ($categories as $category)
                           <option value="{{ $category->id }}">{{ $category->name }}</option>
-  
+
                           @endforeach
-                      
+
                         </select>
                       </div>
                       <!-- /.form-group -->
-                  
+
                       <!-- /.form-group -->
                     </div>
 
@@ -57,7 +61,7 @@
                   <input type="text" class="form-control" name="title" id="title" placeholder="Enter title of Article">
                 </div>
 
-              
+
                 <div class="form-group col-md-6">
                   <label for="short_description">short description of Article</label>
             <input type="text" class="form-control" name="short_description" id="short_description" placeholder="Enter short description of Article">
@@ -83,13 +87,33 @@
                   </div>
                 </div>
 
-            
+                {{-- tags --}}
+                <div class="row">
+                <div class="tag-wrapper">
+                    <div class="tag-title">
+                        <i class="fas fa-tags"></i>
+                        <h2>Tags</h2>
+                    </div>
+                    <div class="tag-content">
+                      <p>Add a comma (,) after each tag</p>
+                      <ul class="tag-ul">
+                        <input type="text" class="form-control" id="tags" name="tags">                    </ul>
+                    </div>
+                    {{-- <div class="tag-details">
+                      <p><span>10</span> tags are remaining</p>
+                      <button>Remove All</button>
+                    </div> --}}
+                  </div>
+
+                </div>
+
 
               </div>
               <!-- /.card-body -->
 
               <div class="card-footer">
-                <button type="button" onclick=" performStore() " class="btn btn-primary">Store</button>
+                {{-- <button type="button" onclick=" performStore() " class="btn btn-primary">Store</button> --}}
+                <button type="submit" class="btn btn-primary">Store</button>
 
                 <a href="{{route('indexArticle' , $id)}}" type="submit" class="btn btn-info">Cancel</a>
 
@@ -113,6 +137,7 @@
 
 @section('scripts')
 
+
 <script>
      function performStore(){
         let formData = new FormData();
@@ -122,10 +147,19 @@
         formData.append('full_description',document.getElementById('full_description').value);
         formData.append('author_id',document.getElementById('author_id').value);
         formData.append('category_id',document.getElementById('category_id').value);
+        let x = document.getElementById('tags').value;
+        let arr = x.split(",");
+
+        formData.append('tags',arr);
         formData.append('image',document.getElementById('image').files[0]);
 
         store('/cms/articles' , formData);
     }
 </script>
+
+{{-- tags script --}}
+<script src="{{ asset('cms/js/tags.js') }}"></script>
+
+
 
 @endsection

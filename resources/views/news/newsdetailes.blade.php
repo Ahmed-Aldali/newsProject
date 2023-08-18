@@ -52,19 +52,53 @@
           <!-- Comments Form -->
           <div class="card my-4">
             <h5 class="card-header">Leave a Comment:</h5>
+            @if(session('success'))
+            <div class="alert alert-success" id="alert-Success-comment">
+                {{ session('success') }}
+            </div>
+            @endif
+            {{-- @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+             @endif --}}
+
             <div class="card-body">
               <form>
                 <div class="form-group">
                   <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
                 </div>
-                <button type="button" onclick="performStore({{ $articles->id }})" class="btn btn-primary">Comment</button>
-                <input hidden id="user_id" name="user_id" value="1">
+                @error('comment')
+                <small class="form-text text-danger">{{ $message }}</small>
+                @enderror
+                <button type="button" onclick="performStore({{ $articles->id }})" class="btn btn-primary mt-4">Comment</button>
+                <input hidden id="user_id" name="user_id" value="10">
 
               </form>
 
 
             </div>
           </div>
+
+          @foreach  ( json_decode($articles->tags, true)  as $tag)
+          <span class="media-body pl-3">
+            <a href="{{ route('TagNews' , $tag) }}" class="btn ">#{{$tag}} </a>
+            </span>
+          @endforeach
+
+
+          <!-- Tags -->
+          {{-- @foreach ( $tags as $tag)
+            <span class="media-body pl-3">
+                #{{ $tag->name }}
+            </span>
+
+          @endforeach --}}
+
 
           <!-- Single Comment -->
           @foreach ( $comments as $comment)
@@ -146,6 +180,13 @@
         }
 
 
+    </script>
+
+    <script>
+    $(function () {
+        var duration = 3000; // 3 seconds
+        setTimeout(function () { $('#alert-Success-comment').hide(); }, duration);
+    });
     </script>
 
     @endsection

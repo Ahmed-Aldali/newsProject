@@ -8,7 +8,8 @@
 
 
 @section('styles')
-
+<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/thinline.css">
+<link rel="stylesheet" href="{{ asset('cms/css/tagsStyle.css') }}">
 @endsection
 
 @section('content')
@@ -25,7 +26,9 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form>
+                <form method="POST" action="{{ route('articles.update', $articles->id) }}">
+                    @csrf
+                    @method('PUT') <!-- Use the PUT method for updates -->
               <div class="card-body">
 
                 <div class="row">
@@ -74,6 +77,9 @@
                 </div>
 
 
+                <input type="text" class="form-control" name="author_id" id="author_id"
+                  value="{{ $articles->author_id }}" hidden>
+
                 <div class="form-group col-md-6">
                   <label for="short_description">short description of Article</label>
             <input type="text" class="form-control" name="short_description" id="short_description"
@@ -101,12 +107,36 @@
                 </div>
 
 
+                    {{-- tags --}}
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <i class="fas fa-tags"></i>
+                <h2>Tags</h2>
+            </div>
+            <div class="tag-content">
+              <p>Add a comma (,) after each tag</p>
+              <ul class="tag-ul">
+                <input class="form-control " type="text" value='{{ substr($articles->tags, 1, -1)  }}'  id="tags" name="tags">                    </ul>
+            </div>
+
+            <div class="tag-details">
+              <p><span>10</span> tags are remaining</p>
+              <button>Remove All</button>
+            </div>
+          </div>
+        </ul>
+
+        </div>
+
+
 
               </div>
               <!-- /.card-body -->
 
               <div class="card-footer">
-                <button type="button" onclick=" performUpdate({{ $articles->id }}) " class="btn btn-primary">Store</button>
+                {{-- <button type="button" onclick=" performUpdate({{ $articles->id }}) " class="btn btn-primary">Store</button> --}}
+                <button type="submit" class="btn btn-primary">Update</button>
 
                 <a href="{{route('articles.index')}}" type="submit" class="btn btn-info">Cancel</a>
 
@@ -144,5 +174,9 @@
         store('/cms/articles-update/'+id , formData);
     }
 </script>
+
+{{-- tags script --}}
+<script src="{{ asset('cms/js/tags.js') }}"></script>
+
 
 @endsection

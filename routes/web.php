@@ -82,6 +82,7 @@ Route::prefix('cms')->middleware('auth:admin,author')->group(function(){
     Route::get('/index/articles/{id}', [ArticleController::class, 'indexArticle'])->name('indexArticle');
     Route::get('/index/CategoryArticles/{id}', [ArticleController::class, 'indexCategoryArticles'])->name('indexCategoryArticles');
     Route::get('/create/articles/{id}', [ArticleController::class, 'createArticle'])->name('createArticle');
+    Route::post('/create/articles/{id}', [ArticleController::class, 'createArticle'])->name('createArticleTag');
 
     Route::resource('sliders' , SliderController::class);
     Route::post('sliders-update/{id}' , [SliderController::class , 'update'])->name('sliders-update');
@@ -106,6 +107,7 @@ Route::prefix('news')->group(function(){
     Route::get('index', [HomeController::class, 'index'])->name('news.index');
     Route::get('all/{id}', [HomeController::class, 'allNews'])->name('news.all');
     Route::get('details/{id}', [HomeController::class, 'details'])->name('news.details');
+    Route::get('Tags/{tag}', [HomeController::class, 'TagNewsIndex'])->name('TagNews');
 
     Route::get('showContact', [HomeController::class, 'showContact'])->name('news.showContact');
     Route::post('storeContact', [HomeController::class, 'storeContact']);

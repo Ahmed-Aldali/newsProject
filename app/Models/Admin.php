@@ -16,6 +16,9 @@ class Admin extends Authenticatable
     public function user(){
         return $this->morphOne(User::class , 'actor' , 'actor_type' , 'actor_id' , 'id');
     }
+    public function languages(){
+        return $this->belongsToMany(Language::class , 'admin_languages');
+    }
 
 
     protected static function boot() {

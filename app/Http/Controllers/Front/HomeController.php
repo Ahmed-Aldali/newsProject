@@ -26,10 +26,19 @@ class HomeController extends Controller
     }
 
 
+    public function TagNewsIndex($tag)
+    {
+        $articles = Article::where('tags','like','%'.$tag.'%')->paginate(4);
+        return response()->view('news.all-news-tags',compact('articles' , 'tag'));
+
+    }
+
     public function details($id){
         $articles = Article::findOrFail($id);
-        $comments = Comment::where('article_id',$id)->get();
-        return response()->view('news.newsdetailes',compact('articles','comments'));
+        $tags = Article::findOrFail($id)->tags;
+        $comments = Comment::where('article_id',$id)->orderBy('created_at','DESC')->get();
+
+        return response()->view('news.newsdetailes',compact('articles','comments' , 'tags'));
     }
 
 
@@ -72,7 +81,7 @@ class HomeController extends Controller
     public function storeComment(Request $request  ){
 
         $validator = Validator($request->all() , [
-
+            'comment' => 'required'
             ] , [
 
             ]);
@@ -87,19 +96,21 @@ class HomeController extends Controller
                 $isSaved = $comments->save();
 
                 if($isSaved){
+                    return back()->with(['success' =>'add successfully']);
 
-                    return response()->json([
-                        'icon' => 'success' ,
-                        'title' => "Created is Successfully" ,
-                    ] , 200);
+                    // return response()->json([
+                    //     'icon' => 'success' ,
+                    //     'title' => "Created is Successfully" ,
+                    // ] , 200);
                 }
 
             }
             else{
-                return response()->json([
-                    'icon' => 'error' ,
-                    'title' => $validator->getMessageBag()->first(),
-                ] , 400);
+                return back()->withErrors($validator)->withInput($request->all());
+                // return response()->json([
+                //     'icon' => 'error' ,
+                //     'title' => $validator->getMessageBag()->first(),
+                // ] , 400);
             }
 
     }
