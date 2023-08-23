@@ -30,19 +30,22 @@
                 <div class="row">
 
                     <div class="form-group col-md-6">
-                        <label for="name">Name of Category</label>
-                  <input type="text" class="form-control" name="name" id="name" 
-                  value="{{ $categories->name }}" placeholder="Enter Name of Category">
-                </div>
+                        <label for="name-ar">Name of Category(AR)</label>
+                        <input type="text" class="form-control" value="{{ json_decode($categories->name, true)['ar']}}" name="name-ar" id="name-ar" placeholder="Enter Name of Category (AR)">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="name-en">Name of Category(EN)</label>
+                        <input type="text" class="form-control" value="{{ json_decode($categories->name, true)['en']}}" name="name-en" id="name-en" placeholder="Enter Name of Category (EN)">
+                    </div>
 
                 <div class="form-group col-md-6">
                     <label for="status">Status</label>
                     <select name="status" id="status" class="form-select form-select-sm" style="width: 100%;">
-                      <option selected> {{ $categories->status }} </option>
-  
-                      <option value="Active">Active</option>
-                        <option value="Inactive">In Active</option>
-                    </select>
+                        <option selected> {{ $categories->status }} </option>
+    
+                        <option value="Active">Active</option>
+                          <option value="Inactive">In Active</option>
+                      </select>
                 </div>
             </div>
 
@@ -90,7 +93,8 @@
      function performUpdate(id){
         let formData = new FormData();
 
-        formData.append('name',document.getElementById('name').value);
+        formData.append('name-ar',document.getElementById('name-ar').value);
+        formData.append('name-en',document.getElementById('name-en').value);
         formData.append('description',document.getElementById('description').value);
         formData.append('status',document.getElementById('status').value);
 

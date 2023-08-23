@@ -23,7 +23,7 @@
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="{{ route('news.index') }}">Home</a>
+          <a href="{{ route('news.index') }}">{{ __('translate.home') }}</a>
         </li>
         <li class="breadcrumb-item active">{{ $articles->category->name }}</li>
       </ol>
@@ -39,7 +39,7 @@
           <hr>
 
           <!-- Date/Time -->
-          <p>Posted on {{ $articles->created_at }} , By {{ $articles->author->user->first_name }} {{ $articles->author->user->last_name }}</p>
+          <p>{{ __('translate.Posted-on') }} {{ $articles->created_at }} , {{ __('translate.By') }} {{ $articles->author->user->first_name }} {{ $articles->author->user->last_name }}</p>
 
           <hr>
 
@@ -51,7 +51,7 @@
 
           <!-- Comments Form -->
           <div class="card my-4">
-            <h5 class="card-header">Leave a Comment:</h5>
+            <h5 class="card-header">{{__('translate.Leave-Comment')}}:</h5>
             @if(session('success'))
             <div class="alert alert-success" id="alert-Success-comment">
                 {{ session('success') }}
@@ -69,22 +69,23 @@
 
             <div class="card-body">
               <form>
+
                 <div class="form-group">
                   <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
                 </div>
+
                 @error('comment')
                 <small class="form-text text-danger">{{ $message }}</small>
                 @enderror
-                <button type="button" onclick="performStore({{ $articles->id }})" class="btn btn-primary mt-4">Comment</button>
+
+                <button type="button" onclick="performStore({{ $articles->id }})" class="btn btn-primary mt-4">{{ __('translate.Comment') }}</button>
                 <input hidden id="user_id" name="user_id" value="10">
-
               </form>
-
-
             </div>
           </div>
 
-          @foreach  ( json_decode($articles->tags, true)  as $tag)
+          {{-- json_decode to  Convert JSON to associative array --}}
+          @foreach  ( json_decode($articles->tags, true)  as $tag) 
           <span class="media-body pl-3">
             <a href="{{ route('TagNews' , $tag) }}" class="btn ">#{{$tag}} </a>
             </span>
@@ -142,18 +143,7 @@
 
         </div>
 
-        <!-- Sidebar Widgets Column -->
-        <div class="col-md-4">
 
-          <!-- Side Widget -->
-          <div class="card my-4">
-            <h5 class="card-header">Side Widget</h5>
-            <div class="card-body">
-              You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
-            </div>
-          </div>
-
-        </div>
 
       </div>
       <!-- /.row -->

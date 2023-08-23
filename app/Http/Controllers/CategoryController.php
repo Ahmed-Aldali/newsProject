@@ -46,7 +46,13 @@ class CategoryController extends Controller
 
         if(! $validator->fails()){
             $categories = new Category();
-            $categories->name = $request->input('name');
+
+            $jsonData = [
+                'ar' => $request->get('name-ar'),
+                'en' => $request->get('name-en')
+            ];
+            $categories->name = json_encode($jsonData);
+
             $categories->status = $request->input('status');
             $categories->description = $request->input('description');
 
@@ -109,7 +115,11 @@ class CategoryController extends Controller
 
             if(! $validator->fails()){
                 $categories = Category::findOrFail($id);
-                $categories->name = $request->input('name');
+                $jsonData = [
+                    'ar' => $request->get('name-ar'),
+                    'en' => $request->get('name-en')
+                ];
+                $categories->name = json_encode($jsonData);
                 $categories->status = $request->input('status');
                 $categories->description = $request->input('description');
 

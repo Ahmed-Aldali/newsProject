@@ -27,7 +27,7 @@ class ArticleController extends Controller
      {
          //
          $articles = Article::where('author_id', $id)->orderBy('created_at', 'desc')->paginate(4);
-
+        
          return response()->view('cms.article.index', compact('articles','id'));
      }
 
@@ -76,11 +76,11 @@ class ArticleController extends Controller
             'tags' => 'nullable|string',
         ]);
 
-        $articles = new Article();
+        $articles = new Article(); 
 
-        $tagNames = explode(',', $validatedData['tags']);
+        $tagNames = explode(',', $validatedData['tags']);//return as array 
         $value = array_values(array_unique($tagNames));
-        $articles->tags = json_encode($value);
+        $articles->tags = json_encode($value); 
         
             if (request()->hasFile('image')) {
                 $image = $request->file('image');
@@ -95,6 +95,11 @@ class ArticleController extends Controller
             $articles->category_id = $request->get('category_id');
             $articles->author_id = $request->get('author_id');
            
+            $jsonData = [
+                'ar' => $request->get('title'),
+                'en' => $request->get('title-en')
+            ];
+            $articles->testTitle = json_encode($jsonData);
 
             $isSaved = $articles->save();
 

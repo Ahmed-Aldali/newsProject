@@ -31,7 +31,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', [HomeController::class, 'index']);
+
 
 
 Route::prefix('cms/')->middleware('guest:admin,author')->group(function(){
@@ -103,21 +103,34 @@ Route::prefix('cms')->middleware('auth:admin,author')->group(function(){
 
 
 
-Route::prefix('news')->group(function(){
-    Route::get('index', [HomeController::class, 'index'])->name('news.index');
-    Route::get('all/{id}', [HomeController::class, 'allNews'])->name('news.all');
-    Route::get('details/{id}', [HomeController::class, 'details'])->name('news.details');
-    Route::get('Tags/{tag}', [HomeController::class, 'TagNewsIndex'])->name('TagNews');
 
-    Route::get('showContact', [HomeController::class, 'showContact'])->name('news.showContact');
-    Route::post('storeContact', [HomeController::class, 'storeContact']);
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){
+        
+        Route::get('/', [HomeController::class, 'index']);
+        
+        Route::prefix('news')->group(function(){
+            Route::get('index', [HomeController::class, 'index'])->name('news.index');
+            Route::get('all/{id}', [HomeController::class, 'allNews'])->name('news.all');
+            Route::get('details/{id}', [HomeController::class, 'details'])->name('news.details');
+            Route::get('Tags/{tag}', [HomeController::class, 'TagNewsIndex'])->name('TagNews');
 
-});
+            Route::get('showContact', [HomeController::class, 'showContact'])->name('news.showContact');
+            Route::post('storeContact', [HomeController::class, 'storeContact']);
+
+        });
 
 
-// Route::prefix('news')->middleware('auth:viewer')->group(function(){
-Route::prefix('news')->group(function(){
+        // Route::prefix('news')->middleware('auth:viewer')->group(function(){
+        Route::prefix('news')->group(function(){
 
-    Route::post('storeComment', [HomeController::class, 'storeComment'])->name('news.storeComment');
+            Route::post('storeComment', [HomeController::class, 'storeComment'])->name('news.storeComment');
 
-});
+        });
+
+
+
+    });

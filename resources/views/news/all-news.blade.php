@@ -15,11 +15,11 @@
     <div class="container">
 
       <!-- Page Heading/Breadcrumbs -->
-      <h1 class="mt-4 mb-3"> {{ $categories->name }}  News</h1>
+      <h1 class="mt-4 mb-3"> {{ $categories->name }}  {{ __('translate.news') }}</h1>
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="{{ route('news.index') }}">Home</a>
+          <a href="{{ route('news.index') }}">{{ __('translate.home') }}</a>
         </li>
       </ol>
 
@@ -34,7 +34,7 @@
         <div class="col-md-5">
           <h3>{{ $article->title }}</h3>
           <p>{{ $article->short_description }}</p>
-          <a class="btn btn-primary" href="{{ route('news.details',$article->id) }}">Read More
+          <a class="btn btn-primary" href="{{ route('news.details',$article->id) }}">{{ __('translate.Learn-More') }}
             <span class="glyphicon glyphicon-chevron-right"></span>
           </a>
         </div>

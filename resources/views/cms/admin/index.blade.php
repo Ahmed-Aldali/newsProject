@@ -48,6 +48,7 @@
                 @foreach ($admins as $admin )
                 <tr>
                     <td>{{$admin->id  }}</td>
+
                     <td>
                       <img class="img-circle img-bordered-sm"
 
@@ -57,7 +58,8 @@
                       src=""
                       @endif
                       width="50" height="50" alt="User Image">
-                  </td>
+                    </td>
+
                     <td>{{ $admin->user->first_name ?? ""}}</td>
                     <td>{{ $admin->user->last_name ?? ""}}</td>
                     <td>{{ $admin->email }}</td>

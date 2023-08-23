@@ -32,15 +32,25 @@
                 <div class="row">
 
                     <div class="form-group col-md-6">
-                        <label for="title">Name of Slider</label>
-                  <input type="text" class="form-control" name="title" id="title" placeholder="Enter title of Slider">
+                        <label for="title-ar">Name of Slider (AR)</label>
+                        <input type="text" class="form-control" name="title-ar" id="title-ar" placeholder="Enter title of Slider (AR)">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="title-en">Name of Slider (EN)</label>
+                        <input type="text" class="form-control" name="title-en" id="title-en" placeholder="Enter title of Slider (EN)">
+                    </div>
+
                 </div>
 
-              
+                <div class="row">
                 <div class="form-group col-md-6">
-                  <label for="description">short description of Slider</label>
-            <input type="text" class="form-control" name="description" id="description" placeholder="Enter short description of Slider">
-          </div>
+                    <label for="description-ar">short description of Slider(AR)</label>
+                    <input type="text" class="form-control" name="description-ar" id="description-ar" placeholder="Enter short description of Slider(AR)">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="description-en">short description of Slider(EN)</label>
+                    <input type="text" class="form-control" name="description-en" id="description-en" placeholder="Enter short description of Slider(EN)">
+                </div>
 
             </div>
             <div class="row">
@@ -85,8 +95,10 @@
      function performStore(){
         let formData = new FormData();
 
-        formData.append('title',document.getElementById('title').value);
-        formData.append('description',document.getElementById('description').value);
+        formData.append('title-ar',document.getElementById('title-ar').value);
+        formData.append('title-en',document.getElementById('title-en').value);
+        formData.append('description-ar',document.getElementById('description-ar').value);
+        formData.append('description-en',document.getElementById('description-en').value);
         formData.append('image',document.getElementById('image').files[0]);
 
         store('/cms/sliders' , formData);

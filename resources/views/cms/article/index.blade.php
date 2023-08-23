@@ -43,8 +43,7 @@
                   <td>
                     <img class="img-circle img-bordered-sm" src="{{asset('storage/images/article/'.$article->image)}}" width="50" height="50" alt="User Image">
                 </td>
-
-                    <td>{{ $article->title }}</td>
+                    <td>{{ json_decode($article->testTitle, true)['ar']}}</td>
                     <td>{{ $article->short_description }}</td>
 
                     {{-- <td><span class="badge bg-info"> {{$Article->status}}</span></td> --}}

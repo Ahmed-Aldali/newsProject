@@ -15,11 +15,12 @@ class CreateArticlesTable extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
-
-            $table->string('title');
+            
             $table->string('image')->nullable();
-            $table->string('short_description');
-            $table->text('full_description');
+            $table->json('title');
+            $table->json('short_description');
+            $table->json('full_description');
+			$table->json('tags')->nullable();
 
             $table->foreignId('category_id');
             $table->foreign('category_id')->on('categories')->references('id')->cascadeOnDelete();

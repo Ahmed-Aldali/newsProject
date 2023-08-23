@@ -61,6 +61,11 @@
                   <input type="text" class="form-control" name="title" id="title" placeholder="Enter title of Article">
                 </div>
 
+                <div class="form-group col-md-6">
+                    <label for="title">Name of Article (En)</label>
+              <input type="text" class="form-control" name="title-en" id="title-en" placeholder="Enter title of Article EN">
+            </div>
+
 
                 <div class="form-group col-md-6">
                   <label for="short_description">short description of Article</label>
@@ -94,7 +99,7 @@
                         <i class="fas fa-tags"></i>
                         <h2>Tags</h2>
                     </div>
-                    <div class="tag-content">
+                    <div class="tag-content"> 
                       <p>Add a comma (,) after each tag</p>
                       <ul class="tag-ul">
                         <input type="text" class="form-control" id="tags" name="tags">                    </ul>
@@ -143,6 +148,7 @@
         let formData = new FormData();
 
         formData.append('title',document.getElementById('title').value);
+        formData.append('title-en',document.getElementById('title-en').value);
         formData.append('short_description',document.getElementById('short_description').value);
         formData.append('full_description',document.getElementById('full_description').value);
         formData.append('author_id',document.getElementById('author_id').value);
@@ -150,7 +156,7 @@
         let x = document.getElementById('tags').value;
         let arr = x.split(",");
 
-        formData.append('tags',arr);
+        formData.append('tags',arr); 
         formData.append('image',document.getElementById('image').files[0]);
 
         store('/cms/articles' , formData);

@@ -32,25 +32,33 @@
                 <div class="row">
 
                     <div class="form-group col-md-6">
-                        <label for="title">Name of Slider</label>
-                  <input type="text" class="form-control" name="title" id="title"
-                  value="{{ $sliders->title }}" placeholder="Enter title of Slider">
+                        <label for="title-ar">Name of Slider (AR)</label>
+                        <input type="text" class="form-control" value='{{ json_decode($sliders->title, true)['ar']}}' name="title-ar" id="title-ar" placeholder="Enter title of Slider (AR)">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="title-en">Name of Slider (EN)</label>
+                        <input type="text" class="form-control"value='{{ json_decode($sliders->title, true)['en']}}'  name="title-en" id="title-en" placeholder="Enter title of Slider (EN)">
+                    </div>
+
                 </div>
 
-              
+                <div class="row">
                 <div class="form-group col-md-6">
-                  <label for="description">short description of Slider</label>
-            <input type="text" class="form-control" name="description" id="description" 
-            value="{{ $sliders->description }}" placeholder="Enter short description of Slider">
-          </div>
+                    <label for="description-ar">short description of Slider(AR)</label>
+                    <input type="text" class="form-control" value='{{ json_decode($sliders->description, true)['ar']}}' name="description-ar" id="description-ar" placeholder="Enter short description of Slider(AR)">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="description-en">short description of Slider(EN)</label>
+                    <input type="text" class="form-control" value='{{ json_decode($sliders->description, true)['en']}}' name="description-en" id="description-en" placeholder="Enter short description of Slider(EN)">
+                </div>
 
             </div>
             <div class="row">
 
             <div class="form-group col-md-12">
               <label for="image">Choose Image</label>
-            <input type="file" class="form-control" name="image" id="image" placeholder="Enter short description of Slider">
-          </div>
+        <input type="file" class="form-control" name="image" id="image" placeholder="Enter short description of Slider">
+      </div>
 
         </div>
 
@@ -59,7 +67,7 @@
               <!-- /.card-body -->
 
               <div class="card-footer">
-                <button type="button" onclick=" performUpdate({{ $sliders->id }}) " class="btn btn-primary">Store</button>
+                <button type="button" onclick="performUpdate({{ $sliders->id }})" class="btn btn-primary">Update</button>
 
                 <a href="{{route('sliders.index')}}" type="submit" class="btn btn-info">Cancel</a>
 
@@ -87,11 +95,14 @@
      function performUpdate(id){
         let formData = new FormData();
 
-        formData.append('title',document.getElementById('title').value);
-        formData.append('description',document.getElementById('description').value);
+        formData.append('title-ar',document.getElementById('title-ar').value);
+        formData.append('title-en',document.getElementById('title-en').value);
+        formData.append('description-ar',document.getElementById('description-ar').value);
+        formData.append('description-en',document.getElementById('description-en').value);
         formData.append('image',document.getElementById('image').files[0]);
 
-        storeRoute('/cms/sliders-update/' + id , formData);
+        storeRoute('/cms/sliders-update/'+id , formData);
+      
     }
 </script>
 

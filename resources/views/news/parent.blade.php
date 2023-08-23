@@ -4,7 +4,7 @@ $categories = Category::where('status','active')->take(3)->get();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang='{{ LaravelLocalization::getCurrentLocale() }}' dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}">
 
   <head>
 
@@ -30,7 +30,7 @@ $categories = Category::where('status','active')->take(3)->get();
     <!-- Navigation -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="{{ route('news.index') }}">news</a>
+            <a class="navbar-brand" href="{{ route('news.index') }}">{{__('translate.news')}}</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                     data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -39,20 +39,30 @@ $categories = Category::where('status','active')->take(3)->get();
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('news.index') }}">home</a>
+                        <a class="nav-link" href="{{ route('news.index') }}">{{__('translate.home')}}</a>
                     </li>
 
                     @foreach ($categories as $category)
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('news.all',$category->id) }}">{{ $category->name }}</a>
+                        <a class="nav-link" href="{{ route('news.all',$category->id) }}">{{ json_decode($category->name, true)[LaravelLocalization::getCurrentLocale()]}}</a>
                     </li>
                     @endforeach
 
 
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('news.showContact') }}">Contact</a>
+                        <a class="nav-link" href="{{ route('news.showContact') }}">{{__('translate.contact')}}</a>
                     </li>
+
+                    
+                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                    
+                    <li class="nav-item d-none d-sm-inline-block">
+                        <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}" 
+                        class="nav-link"> {{ $properties['native'] }}</a>
+                    </li>
+                @endforeach
+
 
                 </ul>
             </div>
@@ -67,7 +77,7 @@ $categories = Category::where('status','active')->take(3)->get();
     <!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Ahmed khaled 2023</p>
+        <p class="m-0 text-center text-white">{{ __('translate.Copyright') }} &copy; {{ __('translate.copyrightName') }} {{ now()->year }}</p>
       </div>
       <!-- /.container -->
     </footer>

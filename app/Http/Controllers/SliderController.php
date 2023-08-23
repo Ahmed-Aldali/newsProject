@@ -52,18 +52,23 @@ class SliderController extends Controller
             if (request()->hasFile('image')) {
 
                 $image = $request->file('image');
-
                 $imageName = time() . 'image.' . $image->getClientOriginalExtension();
-
                 $image->move('storage/images/slider', $imageName);
                 // $image->storeAs('storage/images/admin', $imageName);
-
                 $sliders->image = $imageName;
                 }
 
+                $jsonTitle = [
+                    'ar' => $request->get('title-ar'),
+                    'en' => $request->get('title-en')
+                ];
+                $jsonDesc = [
+                    'ar' => $request->get('description-ar'),
+                    'en' => $request->get('description-en')
+                ];
+                $sliders->title = json_encode($jsonTitle);
+                $sliders->description = json_encode($jsonDesc);
 
-            $sliders->title = $request->get('title');
-            $sliders->description = $request->get('description');
 
             $isSaved = $sliders->save();
             return response()->json([
@@ -135,8 +140,17 @@ class SliderController extends Controller
                 }
 
 
-            $sliders->title = $request->get('title');
-            $sliders->description = $request->get('description');
+           
+                $jsonTitle = [
+                    'ar' => $request->get('title-ar'),
+                    'en' => $request->get('title-en')
+                ];
+                $jsonDesc = [
+                    'ar' => $request->get('description-ar'),
+                    'en' => $request->get('description-en')
+                ];
+                $sliders->title = json_encode($jsonTitle);
+                $sliders->description = json_encode($jsonDesc);
 
             $isSaved = $sliders->save();
 
