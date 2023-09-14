@@ -12,6 +12,7 @@
 
 
 <header>
+
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -25,7 +26,7 @@
                 <div class="carousel-caption d-none d-md-block">
                     <h3>{{ json_decode($slider->title, true)[LaravelLocalization::getCurrentLocale()]}}</h3>
                     <p>{{ json_decode($slider->description, true)[LaravelLocalization::getCurrentLocale()]}}</p>
-                    
+
                 </div>
             </div>
             @endforeach

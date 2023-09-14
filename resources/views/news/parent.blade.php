@@ -4,6 +4,14 @@ $categories = Category::where('status','active')->take(3)->get();
 ?>
 
 <!DOCTYPE html>
+{{-- @if( App::currentLocale() == "ar")
+<html lang='ar' dir="rtl">
+
+@elseif (App::currentLocale() == "en")
+<html lang='en' dir="ltr">
+
+@endif --}}
+
 <html lang='{{ LaravelLocalization::getCurrentLocale() }}' dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}">
 
   <head>
@@ -30,7 +38,7 @@ $categories = Category::where('status','active')->take(3)->get();
     <!-- Navigation -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="{{ route('news.index') }}">{{__('translate.news')}}</a>
+            <a class="navbar-brand" href="{{ route('news.index') }}">{{__('messages.news')}}</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                     data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -39,7 +47,7 @@ $categories = Category::where('status','active')->take(3)->get();
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('news.index') }}">{{__('translate.home')}}</a>
+                        <a class="nav-link" href="{{ route('news.index') }}">{{ trans('messages.home') }}</a>
                     </li>
 
                     @foreach ($categories as $category)
@@ -49,16 +57,15 @@ $categories = Category::where('status','active')->take(3)->get();
                     @endforeach
 
 
-
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('news.showContact') }}">{{__('translate.contact')}}</a>
                     </li>
 
-                    
+
                     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                    
+
                     <li class="nav-item d-none d-sm-inline-block">
-                        <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}" 
+                        <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"
                         class="nav-link"> {{ $properties['native'] }}</a>
                     </li>
                 @endforeach

@@ -32,6 +32,18 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){
+
+
+
+    });
+
+
+
 
 
 Route::prefix('cms/')->middleware('guest:admin,author')->group(function(){
@@ -109,9 +121,9 @@ Route::group(
         'prefix' => LaravelLocalization::setLocale(),
         'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
     ], function(){
-        
+
         Route::get('/', [HomeController::class, 'index']);
-        
+
         Route::prefix('news')->group(function(){
             Route::get('index', [HomeController::class, 'index'])->name('news.index');
             Route::get('all/{id}', [HomeController::class, 'allNews'])->name('news.all');

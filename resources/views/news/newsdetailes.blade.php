@@ -17,7 +17,7 @@
     <div class="container">
 
       <!-- Page Heading/Breadcrumbs -->
-      <h1 class="mt-4 mb-3">{{ $articles->title }}
+      <h1 class="mt-4 mb-3">{{ json_decode($articles->title, true)[LaravelLocalization::getCurrentLocale()]}}
 
       </h1>
 
@@ -25,7 +25,8 @@
         <li class="breadcrumb-item">
           <a href="{{ route('news.index') }}">{{ __('translate.home') }}</a>
         </li>
-        <li class="breadcrumb-item active">{{ $articles->category->name }}</li>
+        {{-- <li class="breadcrumb-item active">{{ $articles->category->name }}</li> --}}
+        <li class="breadcrumb-item active">{{ json_decode($articles->category->name, true)[LaravelLocalization::getCurrentLocale()]}}</li>
       </ol>
 
       <div class="row">
@@ -44,7 +45,7 @@
           <hr>
 
           <!-- Post Content -->
-          <p>{{ $articles->full_description }}</p>
+          <p>{{ json_decode($articles->full_description, true)[LaravelLocalization::getCurrentLocale()]}}</p>
 
 
           <hr>
